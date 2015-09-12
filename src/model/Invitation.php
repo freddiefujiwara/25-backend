@@ -15,9 +15,27 @@ class Invitation {
     }
     public function checkExistence($userId){
         $sql = "SELECT count(*) FROM ".getenv('TABLE_NAME')." WHERE user_id = '$userId'";
-        $result = $this -> pdo->prepare($sql);
-        $result->execute();
-        return 1 == $result->fetchColumn(); 
+        $stmt = $this -> pdo->prepare($sql);
+        $stmt->execute();
+        return 0 < $stmt->fetchColumn(); 
+    }
+    public function loginAndIssue($userId){
+        if(!$this -> validateForUserId($userId)){
+            throw new Exception('NotValid'); 
+        }
+        if(!$this -> checkExistence($userId)){
+            throw new Exception('NotExist'); 
+        }
+        $hash = $this -> issueAHash();
+        $this -> pdo -> query("INSERT INTO ".getenv('TABLE_NAME')." (user_id,hash,created_at) VALUES ('$userId','$hash',NOW())");
+        return $hash;
+    }
+    public function click($hash){
+        $sql = "UPDATE ".getenv('TABLE_NAME')." SET clicked_at = NOW() WHERE hash = '$hash'";
+        $stmt = $this -> pdo->prepare($sql);
+        $stmt->execute();
+        if( 1 !=  $stmt->rowCount()){
+            throw new Exception('NotExist'); 
+        }
     }
 }
-
