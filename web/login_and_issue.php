@@ -29,3 +29,4 @@ EOM;
 ?>
 </body>
 </html>
+<?php
