@@ -12,6 +12,5 @@
     <input name="user_id" type="text" /> <input type="submit" value=
     "Login and Issue" />
   </form>
-<?php var_dump($_ENV) ?>
 </body>
 </html>

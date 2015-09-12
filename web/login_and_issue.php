@@ -10,11 +10,18 @@
 <body>
 <?php
 require '../config/db.php';
+require '../config/url.php';
 require '../src/model/Invitation.php';
 $obj = new Invitation(); 
 try{
     $hash = $obj -> loginAndIssue(trim($_POST['user_id']));
-    echo $hash;
+    $hashParameter = urlencode("?hash=$hash");
+    $html = <<<EOM
+    <textarea>
+$redirecterUrl?hash=$hash&url=$contentsUrl$hashParameter
+    </textarea>
+EOM;
+    echo $html;
 
 }catch(Exception $e){
     echo $e -> getMessage();
