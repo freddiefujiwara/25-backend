@@ -1,6 +1,6 @@
-create table testm (
-  key            char(008)     primary key,
-  data1          int8,
-  data2          int8,
-  data3          int8
+CREATE TABLE invitations (
+  user_id      char(016)     primary key,
+  hash         char(016),
+  invited_from char(016),
+  updated_at   timestamp
 );
