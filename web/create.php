@@ -11,7 +11,7 @@
   <form action="thankyou.php" method="post">
     <input type="hidden" name="hash" value=
     "<?php echo htmlspecialchars($_GET['hash'], ENT_QUOTES);?>" />
-    <input type="text" /> <input type="button" value=
+    <input type="text" /> <input type="submit" value=
     "Create Account" />
   </form>
 </body>

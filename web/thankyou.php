@@ -13,7 +13,7 @@ require '../config/db.php';
 require '../src/model/Invitation.php';
 $obj = new Invitation(); 
 try{
-    $obj -> create(trim($_GET['name']));
+    $obj -> create(trim($_POST['user_id']));
     echo 'Thank you!!';
 
 }catch(Exception $e){
