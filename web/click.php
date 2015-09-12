@@ -4,7 +4,7 @@ require '../src/model/Invitation.php';
 $obj = new Invitation();
 try{
     $obj -> click($_GET['hash']);
-    http_redirect($_GET['url'], array("hash" => $_GET['hash']), true, HTTP_REDIRECT_PERM);
+    header('Location: '.$_GET['url'].'?hash='.$_GET['hash']);
 }catch(Exception $e){
     echo $e -> getMessage();
 }
