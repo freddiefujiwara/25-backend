@@ -1,5 +1,6 @@
 <?php
 require 'src/model/Invitation.php';
+require 'config/db.php'
 
 
 class InvitationTest extends PHPUnit_Framework_TestCase {
@@ -25,5 +26,9 @@ class InvitationTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($ins -> validateForUserId('freddiefujiwara'));
         $this->assertFalse($ins -> validateForUserId('freddiefujiwara '));
         $this->assertFalse($ins -> validateForUserId('freddiefujiwara@'));
+    }
+    public function testCheckExistence(){
+        $ins = new Invitation();
+        $this->assertTrue(method_exists($ins,"checkExistence"));
     }
 }

@@ -1,4 +1,6 @@
 <?php
 require '../src/model/Invitation.php';
 $ins = new Invitation();
-echo $ins -> issueAHash();
+$ins -> issueAHash();
+$url = parse_url(getenv('DATABASE_URL'));
+echo $url;
