@@ -15,8 +15,10 @@ require '../src/model/Invitation.php';
 $obj = new Invitation(); 
 try{
     $hash = $obj -> loginAndIssue(trim($_POST['user_id']));
+    $user_id = htmlspecialchars($_POST['user_id'], ENT_QUOTES);
     $url="$redirecterUrl?hash=$hash&url=$contentsUrl".urlencode("?hash=$hash");
     $html = <<<EOM
+    <h1>HELLO $user_id Your Invitation Code Is Here<h1>
     <textarea>
 $url
     </textarea>
