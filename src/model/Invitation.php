@@ -14,7 +14,11 @@ class Invitation {
     }
     public function checkExistence($userId){
         $sql = "SELECT COUNT(user_id) FROM ".getenv('TABLE_NAME')." WHERE user_id='$userId'";
-        $sql .= "AND hash IS NULL and issued_at IS NULL AND clicked_at IS NULL AND invited_at IS NULL";
+        $sql .= " AND   hash       IS NULL";
+        $sql .= " AND   invited_to IS NULL";
+        $sql .= " AND   issued_at  IS NULL";
+        $sql .= " AND   clicked_at IS NULL";
+        $sql .= " AND   invited_at IS NULL";
         return 0 <  $this -> pdo -> query($sql) -> fetchColumn();
     }
     public function loginAndIssue($userId){
@@ -29,8 +33,14 @@ class Invitation {
         return $hash;
     }
     public function click($hash){
+        $sql = "UPDATE ".getenv('TABLE_NAME')." SET clicked_at=NOW() WHERE hash='$hash'";
+        $sql .= " AND   user_id    IS NOT NULL";
+        $sql .= " AND   invited_to IS NULL";
+        $sql .= " AND   issued_at  IS NOT NULL";
+        $sql .= " AND   clicked_at IS NULL";
+        $sql .= " AND   invited_at IS NULL";
         if( 1 !=  $this -> pdo 
-            -> query("UPDATE ".getenv('TABLE_NAME')." SET clicked_at=NOW() WHERE hash='$hash'") 
+            -> query($sql)
             -> rowCount()){
             throw new Exception('NotExist'); 
         }
@@ -43,7 +53,17 @@ class Invitation {
             throw new Exception('AlreadyExist'); 
         }
         if(!empty($hash)){
-            $this -> pdo-> query("UPDATE ".getenv('TABLE_NAME')." SET invited_to='$userId' ,invited_at=NOW() WHERE hash='$hash' AND clicked_at IS NOT NULL");
+            $sql .= "UPDATE ".getenv('TABLE_NAME')." SET invited_to='$userId' ,invited_at=NOW() WHERE hash='$hash'";
+            $sql .= " AND   user_id    IS NOT NULL";
+            $sql .= " AND   invited_to IS NULL";
+            $sql .= " AND   issued_at  IS NOT NULL";
+            $sql .= " AND   clicked_at IS NOT NULL";
+            $sql .= " AND   invited_at IS NULL";
+            if( 1 !=  $this -> pdo 
+                -> query($sql)
+                -> rowCount()){
+                throw new Exception('NotValid'); 
+            }
         }
         $this -> pdo -> query("INSERT INTO ".getenv('TABLE_NAME')." (user_id) VALUES ('$userId')");
     }
