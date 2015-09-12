@@ -13,7 +13,7 @@ require '../config/db.php';
 require '../src/model/Invitation.php';
 $obj = new Invitation(); 
 try{
-    $hash = $obj -> login_and_issue(trim($_POST['user_id']));
+    $hash = $obj -> loginAndIssue(trim($_POST['user_id']));
     echo $hash;
 
 }catch(Exception $e){
