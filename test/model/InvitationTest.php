@@ -1,6 +1,6 @@
 <?php
 require 'src/model/Invitation.php';
-require 'config/db.php'
+require 'config/db.php';
 
 
 class InvitationTest extends PHPUnit_Framework_TestCase {
