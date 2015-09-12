@@ -8,7 +8,7 @@
     <title>Login And Issue</title>
 
     <!-- Bootstrap -->
-    <!-- Latest compiled and minified CSS --    >
+    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
