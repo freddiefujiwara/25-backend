@@ -47,4 +47,15 @@ class Invitation {
         }
         $this -> pdo -> query("INSERT INTO invitations_test (user_id) VALUES ('$userId')");
     }
+
+    public function dump(){
+        $sql  = "SELECT user_id,invited_to,invited_at FROM ".getenv('TABLE_NAME');
+        $sql .= " WHERE user_id     IS NOT NULL";
+        $sql .= " AND   hash       IS NOT NULL";
+        $sql .= " AND   invited_to IS NOT NULL";
+        $sql .= " AND   issued_at  IS NOT NULL";
+        $sql .= " AND   clicked_at IS NOT NULL";
+        $sql .= " AND   invited_at IS NOT NULL";
+        return $this -> pdo -> query($sql) -> fetchAll(PDO::FETCH_ASSOC);
+    }
 }

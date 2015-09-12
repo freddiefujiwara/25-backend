@@ -119,4 +119,22 @@ class InvitationTest extends PHPUnit_Framework_TestCase {
         $sql = "SELECT count(*) FROM ".getenv('TABLE_NAME')." WHERE invited_to = 'fujiwarafreddie'";
         $this -> assertTrue(1 == $this -> pdo->query($sql)->fetchColumn());
     }
+    public function testDump(){
+        $this->assertTrue(method_exists($this -> obj,"dump"));
+        $this -> pdo -> query("INSERT INTO invitations_test (user_id) VALUES ('freddiefujiwara')");
+        $this -> pdo -> query("INSERT INTO invitations_test (user_id,hash,issued_at) VALUES ('freddiefujiwara','cxn3zm5lkhp4uy7j',NOW())");
+        $this -> pdo -> query("INSERT INTO invitations_test (user_id,hash,issued_at,clicked_at) VALUES ('freddiefujiwara','cxn3zm5lkhp4uy7a',NOW(),NOW())");
+        $this -> pdo -> query("INSERT INTO invitations_test (user_id,hash,issued_at,clicked_at,invited_at,invited_to) VALUES ('freddiefujiwara','bxn3zm5lkhp4uy7j',NOW(),NOW(),NOW(),'fujiwarafreddie')");
+        $this -> pdo -> query("INSERT INTO invitations_test (user_id) VALUES ('fujiwarafreddie')");
+        $this -> pdo -> query("INSERT INTO invitations_test (user_id,hash,issued_at,clicked_at,invited_at,invited_to) VALUES ('freddiefujiwara','axn3zm5lkhp4uy7j',NOW(),NOW(),NOW(),'fujiwara')");
+        $this -> pdo -> query("INSERT INTO invitations_test (user_id) VALUES ('fujiwara')");
+
+        $dump = $this -> obj -> dump();
+        $this -> assertTrue(is_array($dump));
+        $this -> assertTrue(2 == count($dump));
+        $this -> assertTrue(3 == count($dump[0]));
+        $this -> assertTrue(isset($dump[0]['user_id']));
+        $this -> assertTrue(isset($dump[0]['invited_to']));
+        $this -> assertTrue(isset($dump[0]['invited_at']));
+    }
 }
