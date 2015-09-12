@@ -45,7 +45,7 @@ class Invitation {
         if(!empty($hash)){
             $this -> pdo-> query("UPDATE ".getenv('TABLE_NAME')." SET invited_to='$userId' ,invited_at=NOW() WHERE hash='$hash' AND clicked_at IS NOT NULL");
         }
-        $this -> pdo -> query("INSERT INTO invitations_test (user_id) VALUES ('$userId')");
+        $this -> pdo -> query("INSERT INTO ".getenv('TABLE_NAME')." (user_id) VALUES ('$userId')");
     }
 
     public function dump(){
