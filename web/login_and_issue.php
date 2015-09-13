@@ -21,7 +21,6 @@
   <body>
 <?php
 require '../config/db.php';
-require '../config/url.php';
 require '../src/model/Invitation.php';
 $obj = new Invitation(); 
 try{
@@ -30,7 +29,7 @@ try{
     $html = <<<EOM
     <h1>HELLO $user_id Your Invitation Code Is Here<h1>
     <textarea>
-$redirecterUrl?hash=$hash&url=$contentsUrl
+$redirecterUrl?hash=$hash
     </textarea>
 EOM;
     echo $html;

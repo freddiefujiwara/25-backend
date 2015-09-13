@@ -67,10 +67,10 @@ class InvitationTest extends PHPUnit_Framework_TestCase {
         $this->setExpectedException('Exception','NotExist');
         $this -> obj -> loginAndIssue('test');
     }
-    public function testLoginAndIssueWithNotValid(){
+    public function testLoginAndIssueWithInvalid(){
         $this->assertTrue(method_exists($this -> obj,"loginAndIssue"));
 
-        $this->setExpectedException('Exception','NotValid');
+        $this->setExpectedException('Exception','Invalid');
         $this -> obj -> loginAndIssue('#');
     }
     public function testLoginAndIssue(){
@@ -110,7 +110,7 @@ class InvitationTest extends PHPUnit_Framework_TestCase {
         $sql = "SELECT count(*) FROM ".getenv('TABLE_NAME')." WHERE user_id = 'freddiefujiwara'";
         $this -> assertTrue(1 == $this -> pdo->query($sql)->fetchColumn());
 
-        $this -> pdo -> query("INSERT INTO invitations_test (user_id,hash,issued_at,clicked_at) VALUES ('freddiefujiwara','cxn3zm5lkhp4uy7j',NOW(),NOW())");
+        $this -> pdo -> query("INSERT INTO ".getenv('TABLE_NAME')." (user_id,hash,issued_at,clicked_at) VALUES ('freddiefujiwara','cxn3zm5lkhp4uy7j',NOW(),NOW())");
         $this -> obj -> create("fujiwarafreddie","cxn3zm5lkhp4uy7j");
 
         $sql = "SELECT count(*) FROM ".getenv('TABLE_NAME')." WHERE user_id = 'fujiwarafreddie'";
