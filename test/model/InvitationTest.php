@@ -15,7 +15,7 @@ class InvitationTest extends PHPUnit_Framework_TestCase {
         $this -> obj = new Invitation();
     }
     public function tearDown(){
-//        $this -> pdo -> query('DROP TABLE IF EXISTS invitations_test');
+        $this -> pdo -> query('DROP TABLE IF EXISTS invitations_test');
     }
     public function testConstructorAndConfig(){
         $this->assertNotNull($this -> obj);
