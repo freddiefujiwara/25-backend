@@ -21,6 +21,7 @@
   <body>
 <?php
 require '../config/db.php';
+require '../config/url.php';
 require '../src/model/Invitation.php';
 $obj = new Invitation(); 
 try{
