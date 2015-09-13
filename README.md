@@ -1,7 +1,5 @@
 # php-getting-started
 
-A barebones PHP app that makes use of the [Silex](http://silex.sensiolabs.org/) web framework, which can easily be deployed to Heroku.
-
 This application supports the [Getting Started with PHP on Heroku](https://devcenter.heroku.com/articles/getting-started-with-php) article - check it out.
 
 ## Deploying
@@ -9,10 +7,11 @@ This application supports the [Getting Started with PHP on Heroku](https://devce
 Install the [Heroku Toolbelt](https://toolbelt.heroku.com/).
 
 ```sh
-$ git clone git@github.com:heroku/php-getting-started.git # or clone your own fork
-$ cd php-getting-started
+$ git clone https://github.com/freddiefujiwara/nikotama2015-backend.git
+$ cd nikotama2015-backend
 $ heroku create
 $ git push heroku master
+$ heroku addons:create heroku-postgresql
 $ heroku open
 ```
 
@@ -21,3 +20,4 @@ $ heroku open
 For more information about using PHP on Heroku, see these Dev Center articles:
 
 - [PHP on Heroku](https://devcenter.heroku.com/categories/php)
+- [Postgres on Heroku](https://addons.heroku.com/heroku-postgresql)
